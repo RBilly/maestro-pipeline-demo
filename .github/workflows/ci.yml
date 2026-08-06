@@ -1,0 +1,19 @@
+name: CI
+
+# Runs on pull requests as well as pushes, because the pull-request run is the one Maestro reads
+# back: `fetch_ci_state` summarises the check runs for the PR head, and a push-only workflow leaves
+# it with nothing to summarise on a fork or a branch it did not push itself.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test test/
