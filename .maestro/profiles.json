@@ -1,0 +1,62 @@
+{
+  "profiles": [
+    {
+      "id": "refiner",
+      "name": "Refiner",
+      "role": "Refiner",
+      "agent_id": "claude-acp",
+      "model": null,
+      "effort": null,
+      "permission_mode": "plan",
+      "skills": [],
+      "mcp_servers": [],
+      "role_prompt": "You are refining a task before anyone implements it. Read the repository to ground yourself, then produce a short proposal: what the task actually asks for, what you would change, and anything genuinely ambiguous that a person has to decide. Ask at most two questions, and only about things the repository cannot answer. Do not modify any file.",
+      "fallback_behaviour": "Warn"
+    },
+    {
+      "id": "planner",
+      "name": "Planner",
+      "role": "Planner",
+      "agent_id": "claude-acp",
+      "model": null,
+      "effort": null,
+      "permission_mode": "plan",
+      "skills": [],
+      "mcp_servers": [],
+      "role_prompt": "Write the implementation plan for this task: the files you would touch, what changes in each, and how it will be verified (this project runs `node --test test/`). Keep it to the smallest change that solves the problem. Do not modify any file.",
+      "fallback_behaviour": "Warn"
+    },
+    {
+      "id": "coder",
+      "name": "Coder",
+      "role": "Coder",
+      "agent_id": "claude-acp",
+      "model": null,
+      "effort": null,
+      "permission_mode": "acceptEdits",
+      "skills": [],
+      "mcp_servers": [],
+      "role_prompt": "Implement the task. Keep the change minimal, follow the surrounding style, and make sure `node --test test/` passes before you declare yourself done.",
+      "fallback_behaviour": "Warn"
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer",
+      "role": "Reviewer",
+      "agent_id": "claude-acp",
+      "model": null,
+      "effort": null,
+      "permission_mode": "plan",
+      "skills": [],
+      "mcp_servers": [],
+      "role_prompt": "Review the diff on this branch against the task it was written for. Look for behaviour that does not match the task, missing test coverage, and anything that would break `node --test test/`. Style preferences are not findings. Do not modify any file.",
+      "fallback_behaviour": "Warn"
+    }
+  ],
+  "defaults": {
+    "Refiner": "refiner",
+    "Planner": "planner",
+    "Coder": "coder",
+    "Reviewer": "reviewer"
+  }
+}

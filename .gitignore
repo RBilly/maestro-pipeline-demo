@@ -1,2 +1,9 @@
 node_modules/
-.maestro/
+
+# `.maestro/` is machine state — worktrees, cached session ids, the deployed server binary — with
+# one exception: `profiles.json` says what a reviewer *is* for this project, which is a property of
+# the project rather than of the machine, so it is committed. The directory has to be excluded
+# entry by entry rather than wholesale, because git will not descend into an ignored directory to
+# find a negated pattern inside it.
+.maestro/*
+!.maestro/profiles.json
