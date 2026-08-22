@@ -1,4 +1,4 @@
 /** Greet someone by name. */
 export function greet(name) {
-  return `Hello, ${String(name).trim()}!`;
+  return `Hello, ${String(name).trim()}.`;
 }
